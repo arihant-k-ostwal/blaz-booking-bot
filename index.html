@@ -2,68 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blaz Booth Agent</title>
-
-  <!-- Fonts and Dialogflow Widget -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"/>
   <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f9fafc;
+      font-family: 'Google Sans', sans-serif;
+      background: #f4f5f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
-    header {
+    .container {
       text-align: center;
-      padding: 40px 20px 20px;
+      margin-bottom: 100px;
     }
 
-    header img {
-      width: 65px;
-      margin-bottom: 12px;
+    .logo {
+      width: 64px;
+      height: 64px;
       border-radius: 12px;
+      margin-bottom: 16px;
     }
 
-    header h1 {
-      font-size: 24px;
+    h1 {
+      font-size: 1.6rem;
       margin: 0;
-      color: #222;
+      color: #111827;
     }
 
-    header p {
-      margin: 10px 0 0;
-      font-size: 14px;
-      color: #555;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
+    p {
+      margin: 8px 0 0;
+      font-size: 0.95rem;
+      color: #374151;
     }
 
     df-messenger {
       z-index: 999;
       position: fixed;
-      bottom: 16px;
-      right: 16px;
-      --df-messenger-font-family: 'Inter', sans-serif;
       --df-messenger-font-color: #000;
+      --df-messenger-font-family: 'Google Sans';
       --df-messenger-chat-background: #f3f6fc;
       --df-messenger-message-user-background: #d3e3fd;
       --df-messenger-message-bot-background: #fff;
+      bottom: 16px;
+      right: 16px;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <!-- Replace this with your uploaded logo file if needed -->
-    <img src="blaz-logo.png" alt="Blaz Entertainment Logo" />
+  <div class="container">
+    <img class="logo" src="https://i.ibb.co/gdx9Whv/blaz-logo.png" alt="Blaz Logo" />
     <h1>🎤 Blaz Booth Agent</h1>
     <p>Submit your booth request here — a Blaz team member will reach out by phone to confirm your spot.</p>
-  </header>
+  </div>
 
   <df-messenger
     project-id="blaz-booth-booking-v4"
@@ -73,14 +70,25 @@
     <df-messenger-chat-bubble chat-title="Blaz Booth Agent"></df-messenger-chat-bubble>
   </df-messenger>
 
-  <!-- Auto-open the chat bubble -->
   <script>
-    window.addEventListener('dfMessengerLoaded', function () {
+    // Automatically open the chat bubble once loaded
+    const openChatBubble = () => {
       const dfMessenger = document.querySelector('df-messenger');
-      const chatBubble = dfMessenger.shadowRoot.querySelector('df-messenger-chat-bubble');
-      if (chatBubble) chatBubble.click();
-    });
-  </script>
+      if (!dfMessenger) return;
 
+      const tryOpen = () => {
+        const bubble = dfMessenger.shadowRoot?.querySelector('df-messenger-chat-bubble');
+        if (bubble) {
+          bubble.click();
+          return;
+        }
+        setTimeout(tryOpen, 200); // Try again every 200ms
+      };
+
+      tryOpen();
+    };
+
+    window.addEventListener('DOMContentLoaded', openChatBubble);
+  </script>
 </body>
 </html>
