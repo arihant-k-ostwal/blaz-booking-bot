@@ -10,7 +10,7 @@
     body {
       margin: 0;
       font-family: 'Google Sans', sans-serif;
-      background: #f4f5f7;
+      background: #f9fafb;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,74 +20,64 @@
 
     .container {
       text-align: center;
-      margin-bottom: 100px;
-    }
-
-    .logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 120px;
     }
 
     h1 {
-      font-size: 1.6rem;
+      font-size: 2rem;
       margin: 0;
       color: #111827;
     }
 
     p {
-      margin: 8px 0 0;
-      font-size: 0.95rem;
+      margin: 10px 0 0;
+      font-size: 1rem;
       color: #374151;
     }
 
     df-messenger {
       z-index: 999;
       position: fixed;
+      bottom: 16px;
+      right: 16px;
       --df-messenger-font-color: #000;
       --df-messenger-font-family: 'Google Sans';
       --df-messenger-chat-background: #f3f6fc;
       --df-messenger-message-user-background: #d3e3fd;
-      --df-messenger-message-bot-background: #fff;
-      bottom: 16px;
-      right: 16px;
+      --df-messenger-message-bot-background: #ffffff;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="blaz-logo.png" alt="Bläz Logo" />
     <h1>🎤 Bläz Booth Agent</h1>
-    <p>Submit your booth request here — a Bläz team member will reach out by phone to confirm your spot.</p>
+    <p>Submit your booth request here — a Bläz team member will call to confirm your spot.</p>
   </div>
 
   <df-messenger
     project-id="blaz-booth-booking-v4"
     agent-id="75a00e35-c21a-4940-8798-1c5ab754f338"
-    language-code="en"
-    max-query-length="-1">
+    language-code="en">
     <df-messenger-chat-bubble chat-title="Bläz Booth Agent"></df-messenger-chat-bubble>
   </df-messenger>
 
   <script>
-    customElements.whenDefined('df-messenger').then(() => {
-      const messenger = document.querySelector('df-messenger');
+    window.addEventListener('load', () => {
+      const openChat = () => {
+        const dfMessenger = document.querySelector('df-messenger');
+        if (!dfMessenger) return;
 
-      const tryOpen = () => {
-        const shadowRoot = messenger.shadowRoot;
-        const bubble = shadowRoot?.querySelector('df-messenger-chat-bubble');
-        const button = bubble?.shadowRoot?.querySelector('div[role="button"]');
-        if (button) {
-          button.click();
-          return true;
+        const chatBubble = dfMessenger.shadowRoot?.querySelector('df-messenger-chat-bubble');
+        const openButton = chatBubble?.shadowRoot?.querySelector('div[role="button"]');
+
+        if (openButton) {
+          openButton.click();
+          clearInterval(interval); // Stop polling once opened
         }
-        return false;
       };
 
-      const interval = setInterval(() => {
-        if (tryOpen()) clearInterval(interval);
-      }, 300);
+      // Keep trying every 300ms until it works
+      const interval = setInterval(openChat, 300);
     });
   </script>
 </body>
