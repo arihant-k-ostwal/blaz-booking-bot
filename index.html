@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blaz Booth Agent</title>
+  <title>Bläz Booth Agent</title>
   <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"/>
-  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger.js"></script>
   <style>
     body {
       margin: 0;
@@ -15,12 +15,13 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .container {
       text-align: center;
       margin-bottom: 100px;
+      padding: 0 20px;
     }
 
     .logo {
@@ -36,10 +37,12 @@
       color: #111827;
     }
 
-    p {
-      margin: 8px 0 0;
-      font-size: 0.95rem;
+    .booking-instructions {
       color: #374151;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 600px;
     }
 
     df-messenger {
@@ -57,13 +60,13 @@
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="https://i.ibb.co/gdx9Whv/blaz-logo.png" alt="Blaz Logo" />
-    <h1>🎤 Blaz Booth Agent</h1>
-      <p class="booking-instructions">
-  Submit your booth request using the chat below. <br />
-  A <strong>Bläz</strong> team member will reach out by phone to confirm your spot. <br /><br />
-  The chat window is located at the <strong>bottom right</strong> of your screen — click to get started.
-</p>
+    <img class="logo" src="https://i.ibb.co/gdx9Whv/blaz-logo.png" alt="Bläz Logo" />
+    <h1>🎤 Bläz Booth Agent</h1>
+    <p class="booking-instructions">
+      Submit your booth request using the chat below. <br />
+      A <strong>Bläz</strong> team member will reach out by phone to confirm your spot. <br /><br />
+      The chat window is located at the <strong>bottom right</strong> of your screen — click to get started.
+    </p>
   </div>
 
   <df-messenger
@@ -71,22 +74,23 @@
     agent-id="75a00e35-c21a-4940-8798-1c5ab754f338"
     language-code="en"
     max-query-length="-1">
-    <df-messenger-chat-bubble chat-title="Blaz Booth Agent"></df-messenger-chat-bubble>
+    <df-messenger-chat-bubble chat-title="Bläz Booth Agent"></df-messenger-chat-bubble>
   </df-messenger>
 
   <script>
-    // Automatically open the chat bubble once loaded
+    // Attempt to auto-open the chat bubble
     const openChatBubble = () => {
       const dfMessenger = document.querySelector('df-messenger');
       if (!dfMessenger) return;
 
       const tryOpen = () => {
         const bubble = dfMessenger.shadowRoot?.querySelector('df-messenger-chat-bubble');
-        if (bubble) {
-          bubble.click();
+        const button = bubble?.shadowRoot?.querySelector('div[role="button"]');
+        if (button) {
+          button.click();
           return;
         }
-        setTimeout(tryOpen, 200); // Try again every 200ms
+        setTimeout(tryOpen, 200); // Retry every 200ms
       };
 
       tryOpen();
