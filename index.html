@@ -49,7 +49,7 @@
       font-size: 1.1rem;
       line-height: 1.8;
       color: #374151;
-      margin: 0 auto 20px;
+      margin: 0 auto 10px;
     }
 
     strong {
@@ -68,72 +68,4 @@
       right: 16px;
     }
 
-    /* Pulse Button */
-    .pulse-hint {
-      position: fixed;
-      bottom: 90px;
-      right: 28px;
-      background-color: #6366f1;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      box-shadow: 0 0 0 rgba(99, 102, 241, 0.7);
-      animation: pulse 2s infinite;
-      cursor: pointer;
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 24px 16px;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .pulse-hint {
-        right: 20px;
-        bottom: 80px;
-        font-size: 0.85rem;
-        padding: 8px 14px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🎤 Bläz Booth Agent</h1>
-    <p>
-      Submit your booth request here. A <strong>Bläz</strong> team member will reach out by phone to confirm your spot.
-    </p>
-    <p>
-      The chat window is located at the <strong>bottom right</strong> of your screen — go ahead and click to get started.
-    </p>
-  </div>
-
-  <div class="pulse-hint" onclick="document.querySelector('df-messenger').shadowRoot.querySelector('df-messenger-chat-bubble').click()">
-    Start Chat 💬
-  </div>
-
-  <df-messenger
-    project-id="blaz-booth-booking-v4"
-    agent-id="75a00e35-c21a-4940-8798-1c5ab754f338"
-    language-code="en"
-    max-query-length="-1">
-    <df-messenger-chat-bubble chat-title="Bläz Booth Agent"></df-messenger-chat-bubble>
-  </df-messenger>
-</body>
-</html>
+    @media
