@@ -59,7 +59,7 @@
 <body>
 
   <header>
-    <!-- Make sure to upload blaz-logo.png into your GitHub repo root directory -->
+    <!-- Replace this with your uploaded logo file if needed -->
     <img src="blaz-logo.png" alt="Blaz Entertainment Logo" />
     <h1>🎤 Blaz Booth Agent</h1>
     <p>Submit your booth request here — a Blaz team member will reach out by phone to confirm your spot.</p>
@@ -72,6 +72,15 @@
     max-query-length="-1">
     <df-messenger-chat-bubble chat-title="Blaz Booth Agent"></df-messenger-chat-bubble>
   </df-messenger>
+
+  <!-- Auto-open the chat bubble -->
+  <script>
+    window.addEventListener('dfMessengerLoaded', function () {
+      const dfMessenger = document.querySelector('df-messenger');
+      const chatBubble = dfMessenger.shadowRoot.querySelector('df-messenger-chat-bubble');
+      if (chatBubble) chatBubble.click();
+    });
+  </script>
 
 </body>
 </html>
