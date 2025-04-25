@@ -1,6 +1,6 @@
 # Bläz Booth Agent
 
-This is a lightweight HTML page to embed the Blaz Entertainment booth booking chatbot powered by Google Cloud Conversational Agent.
+This is a lightweight HTML page to embed the Bläz Entertainment booth booking chatbot powered by Google Cloud Conversational Agent.
 
 ## ✅ Live Site
 
