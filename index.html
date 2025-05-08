@@ -4,20 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bläz Booth Agent</title>
-
-  <!-- 1) Load the Vertex AI client library -->
-  <script src="https://unpkg.com/@google-labs/conversational-ai-client@latest/dist/client.js"></script>
-  <script>
-    // 2) Tell it which agent and what initial message to send
-    window.ConversationalAIConfig = {
-      projectId:         "blaz-booth-booking-v4",
-      agentId:           "75a00e35-c21a-4940-8798-1c5ab754f338",
-      language:          "en",
-      sendInitialMessage: true,
-      initialMessage:     "👋 Hi there! I’m Bläz’s booth‑booking assistant. What’s your name?"
-    };
-  </script>
-
+  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"/>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,20 +18,23 @@
       height: 100vh;
       text-align: center;
     }
+
     .container {
       max-width: 600px;
       padding: 20px;
     }
+
     h1 {
       font-size: 24px;
       margin-bottom: 16px;
     }
+
     p {
       font-size: 16px;
       color: #333;
     }
-    /* 3) Style the new widget so it sits bottom‑right */
-    conversational-ai-client {
+
+    df-messenger {
       position: fixed;
       bottom: 16px;
       right: 16px;
@@ -52,4 +43,19 @@
 </head>
 <body>
   <div class="container">
-    <h1>🎤 Bläz Booth Agent</h
+    <h1>🎤 Bläz Booth Agent</h1>
+    <p>
+  Use the chat at the <strong>bottom right</strong> to request a booth — a <strong>Bläz</strong> team member will call to confirm.
+</p>
+
+  </div>
+
+  <df-messenger
+    project-id="blaz-booth-booking-v4"
+    agent-id="75a00e35-c21a-4940-8798-1c5ab754f338"
+    language-code="en"
+    max-query-length="-1">
+    <df-messenger-chat-bubble chat-title="Bläz Booth Agent"></df-messenger-chat-bubble>
+  </df-messenger>
+</body>
+</html>
