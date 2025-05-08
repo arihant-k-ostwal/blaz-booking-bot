@@ -5,19 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bläz Booth Agent</title>
 
-  <!-- Official Vertex AI Conversational AI Client -->
-  <script src="https://www.gstatic.com/cloud/vertex-ai/conversational-ai/client.js"></script>
-
+  <!-- Correct Official Vertex AI Conversational AI Client -->
+  <script src="https://unpkg.com/@google-labs/conversational-ai-client@latest/dist/client.js"></script>
   <script>
-    window.onload = () => {
-      const client = document.querySelector("vertex-ai-chat");
-      client.config = {
-        projectId: "blaz-booth-booking-v4",
-        agentId: "75a00e35-c21a-4940-8798-1c5ab754f338",
-        languageCode: "en",
-        sendInitialQuery: true,
-        initialQuery: "Hello" // this triggers the Default Welcome Intent immediately
-      };
+    window.ConversationalAIConfig = {
+      projectId: "blaz-booth-booking-v4",
+      agentId: "75a00e35-c21a-4940-8798-1c5ab754f338",
+      language: "en",
+      sendInitialMessage: true,
+      initialMessage: "Hello"
     };
   </script>
 
@@ -49,7 +45,7 @@
       color: #333;
     }
 
-    vertex-ai-chat {
+    conversational-ai-client {
       position: fixed;
       bottom: 16px;
       right: 16px;
@@ -67,7 +63,7 @@
     </p>
   </div>
 
-  <!-- New Vertex AI Chat Client (official widget) -->
-  <vertex-ai-chat></vertex-ai-chat>
+  <!-- CORRECT official widget tag for Vertex AI Conversational Agents -->
+  <conversational-ai-client></conversational-ai-client>
 </body>
 </html>
