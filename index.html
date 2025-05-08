@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bläz Booth Agent</title>
 
-  <!-- Vertex AI Conversational Client -->
+  <!-- 1) Load the Vertex AI client library -->
   <script src="https://unpkg.com/@google-labs/conversational-ai-client@latest/dist/client.js"></script>
   <script>
+    // 2) Tell it which agent and what initial message to send
     window.ConversationalAIConfig = {
       projectId:         "blaz-booth-booking-v4",
       agentId:           "75a00e35-c21a-4940-8798-1c5ab754f338",
@@ -29,22 +30,19 @@
       height: 100vh;
       text-align: center;
     }
-
     .container {
       max-width: 600px;
       padding: 20px;
     }
-
     h1 {
       font-size: 24px;
       margin-bottom: 16px;
     }
-
     p {
       font-size: 16px;
       color: #333;
     }
-
+    /* 3) Style the new widget so it sits bottom‑right */
     conversational-ai-client {
       position: fixed;
       bottom: 16px;
@@ -54,13 +52,4 @@
 </head>
 <body>
   <div class="container">
-    <h1>🎤 Bläz Booth Agent</h1>
-    <p>
-      Use the chat at the <strong>bottom right</strong> to request a booth — a <strong>Bläz</strong> team member will call to confirm.
-    </p>
-  </div>
-
-  <!-- Replace df-messenger with the new conversational client -->
-  <conversational-ai-client></conversational-ai-client>
-</body>
-</html>
+    <h1>🎤 Bläz Booth Agent</h
