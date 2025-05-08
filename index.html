@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bläz Booth Agent</title>
 
-  <!-- Dialogflow Messenger styles & script -->
-  <link
-    rel="stylesheet"
-    href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"/>
-  <script
-    src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js">
+  <!-- Official Vertex AI Conversational AI Client -->
+  <script src="https://www.gstatic.com/cloud/vertex-ai/conversational-ai/client.js"></script>
+
+  <script>
+    window.onload = () => {
+      const client = document.querySelector("vertex-ai-chat");
+      client.config = {
+        projectId: "blaz-booth-booking-v4",
+        agentId: "75a00e35-c21a-4940-8798-1c5ab754f338",
+        languageCode: "en",
+        sendInitialQuery: true,
+        initialQuery: "Hello" // this triggers the Default Welcome Intent immediately
+      };
+    };
   </script>
 
   <style>
@@ -41,37 +49,25 @@
       color: #333;
     }
 
-    /* Position and theme your chat widget */
-    df-messenger {
-      z-index: 999;
+    vertex-ai-chat {
       position: fixed;
       bottom: 16px;
       right: 16px;
-      --df-messenger-font-color: #000;
-      --df-messenger-font-family: "Google Sans", sans-serif;
-      --df-messenger-chat-background: #f3f6fc;
-      --df-messenger-message-user-background: #d3e3fd;
-      --df-messenger-message-bot-background: #fff;
+      z-index: 9999;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>🎤 Bläz Booth Agent</h1>
     <p>
-      Use the chat at the <strong>bottom right</strong> to request a booth — a <strong>Bläz</strong>
-      team member will call to confirm.
+      Use the chat at the <strong>bottom right</strong> to request a booth —
+      a <strong>Bläz</strong> team member will call to confirm.
     </p>
   </div>
 
-  <!-- Your chat widget; fires the Default Welcome Intent immediately -->
-  <df-messenger
-    project-id="blaz-booth-booking-v4"
-    agent-id="75a00e35-c21a-4940-8798-1c5ab754f338"
-    language-code="en"
-    max-query-length="-1"
-    initial-intent="WELCOME"
-    chat-title="Bläz Booth Agent">
-  </df-messenger>
+  <!-- New Vertex AI Chat Client (official widget) -->
+  <vertex-ai-chat></vertex-ai-chat>
 </body>
 </html>
